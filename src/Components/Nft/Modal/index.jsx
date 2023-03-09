@@ -9,6 +9,7 @@ import {
   StyledDialog,
 } from './styles';
 import { Store, Description } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 
 const Details = ({ isOpen, handleClose, nft }) => {
   const getAddress = (address = '', startLen = 4, endLen = 4) => {
@@ -17,6 +18,8 @@ const Details = ({ isOpen, handleClose, nft }) => {
       address.length,
     )}`;
   };
+
+  const nftUrl = `https://opensea.io/assets/ethereum/${nft?.contractAddress}/${nft?.tokenId}`;
 
   return (
     <StyledDialog open={isOpen} onClose={handleClose}>
@@ -60,7 +63,13 @@ const Details = ({ isOpen, handleClose, nft }) => {
                 <Typography fontWeight="600" mb=".5rem">
                   {nft?.floorPrice}
                 </Typography>
-                <Button variant="contained" size="large">
+                <Button
+                  variant="contained"
+                  size="large"
+                  component={Link}
+                  to={nftUrl}
+                  target="_blank"
+                >
                   Buy On Open sea
                 </Button>
               </SectionBody>
@@ -74,6 +83,7 @@ const Details = ({ isOpen, handleClose, nft }) => {
               <Divider />
               <SectionBody>
                 <Typography>Contract Address: {getAddress(nft?.contractAddress)}</Typography>
+                <Typography>Token ID: {nft?.tokenId}</Typography>
                 <Typography>Token Standard: {nft?.tokenStandard}</Typography>
               </SectionBody>
             </div>

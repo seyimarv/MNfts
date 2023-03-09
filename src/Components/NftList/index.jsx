@@ -16,7 +16,7 @@ const NftList = ({ searchBy }) => {
   const [isLoading, setIsLoading] = useState(true);
   let [searchParams] = useSearchParams();
   const baseUrl = `https://eth-mainnet.g.alchemy.com/nft/v2/${process.env.REACT_APP_ALCHEMY_API_KEY}`;
-  const address = searchParams.get('address') || '0x5b7b405Fc45c567B3f1f66517B92FEF563e3D6a7';
+  const address = searchParams.get('address') || '0x1064aA646A7Aedbd40816Fc0C35E044D0244a764';
 
   const parseNfts = async (nfts) => {
     let nftArray = [];
@@ -28,7 +28,7 @@ const NftList = ({ searchBy }) => {
         alchemy.nft.getFloorPrice(contractAddress),
       ]);
       const nft = {
-        tokenId: item.metadata.tokenId,
+        tokenId: parseInt(tokenId, 16),
         title: item?.title,
         imageUrl: `${item?.media[0].raw.replace('ipfs://', 'https://ipfs.io/ipfs/')}`,
         description: item?.description,
@@ -48,7 +48,7 @@ const NftList = ({ searchBy }) => {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${baseUrl}/getNFTs?owner=${address}&withMetadata=true&pageSize=8`,
+        `${baseUrl}/getNFTs?owner=${address}&withMetadata=true&pageSize=12`,
       );
       const nfts = await response.json();
       await parseNfts(nfts.ownedNfts);

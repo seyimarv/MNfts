@@ -4,7 +4,7 @@ import Header from './Components/Header';
 import NftList from './Components/NftList';
 
 function App() {
-  const [searchBy, setSearchBy] = useState('contractAddress');
+  const [searchBy, setSearchBy] = useState('ownerAddress');
   return (
     <Wrapper>
       <Header searchBy={searchBy} setSearchBy={setSearchBy} />

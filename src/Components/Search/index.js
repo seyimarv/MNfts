@@ -49,8 +49,8 @@ const SearchBar = ({ searchBy, setSearchBy }) => {
           label="Search By"
           onChange={handleChange}
         >
+          <MenuItem value="ownerAddress">Owner address</MenuItem>
           <MenuItem value="contractAddress">Contract address</MenuItem>
-          <MenuItem value="OwnerAddress">Owner address</MenuItem>
         </StyledSelect>
       </FormControl>
       <input
